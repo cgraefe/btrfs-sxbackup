@@ -32,7 +32,7 @@ def build_subprocess_args(cmd, url=None):
             url_string = '%s@%s' % (url.username, url.hostname)
 
     subprocess_args = ['bash', '-c'] + cmd if url_string is None else \
-        ['ssh', '-o', 'ServerAliveInterval=5', '-o', 'ServerAliveCountMax=3', '%s'
+        ['ssh', '-o', 'ServerAliveInterval=5', '-o', 'ServerAliveCountMax=30', '%s'
          % url_string] + cmd
 
     _logger.debug(subprocess_args)
@@ -72,5 +72,3 @@ def exists(command, url=None):
                                 stderr=subprocess.PIPE,
                                 shell=False)
     return type_prc.wait() == 0
-
-
